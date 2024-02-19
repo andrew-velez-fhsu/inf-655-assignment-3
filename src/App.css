@@ -1,7 +1,3 @@
-.App {
-  text-align: center;
-}
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -13,6 +9,16 @@
   }
 }
 
+.Task{
+  padding-right: 10px;
+  padding-left: 10px;
+  font-size: 1.5em;
+}
+
+.Task-Complete{
+  text-decoration: line-through;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -22,6 +28,10 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.Task-List{
+  margin-top: 2em;
 }
 
 .App-link {
