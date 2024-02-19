@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
-import Stack from "react-bootstrap/Stack";
 import NewTask from "./NewTask";
 import TaskList from "./TaskList";
 
@@ -36,17 +35,15 @@ const TaskForm = () => {
   };
 
   return (
-    <>
-      <Container>
-        <NewTask onAddTask={handleAddTask} />
-
-        <TaskList
-          tasks={tasks}
-          onChange={handleUpdateTask}
-          onDelete={handleDeleteTask}
-        />
-      </Container>
-    </>
+    <Container>
+      <NewTask onAddTask={handleAddTask} />
+      <hr />
+      <TaskList
+        tasks={tasks}
+        onChange={handleUpdateTask}
+        onDelete={handleDeleteTask}
+      />
+    </Container>
   );
 };
 
