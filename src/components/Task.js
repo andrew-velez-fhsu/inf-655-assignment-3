@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import CloseButton from "react-bootstrap/CloseButton";
+import Card from "./shared/card";
 
 const Task = ({ task, onChange, onDelete }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -9,10 +10,20 @@ const Task = ({ task, onChange, onDelete }) => {
   if (isEditing) {
     taskContent = (
       <>
+        <label htmlFor="name">Name:</label>
         <input
           value={task.title}
+          name="name"
           onChange={(e) => {
             onChange({ ...task, title: e.target.value });
+          }}
+        />
+        <label htmlFor="description">Description:</label>
+        <input
+          name="description"
+          value={task.description}
+          onChange={(e) => {
+            onChange({ ...task, description: e.target.value });
           }}
         />
         <Button variant="link" onClick={() => setIsEditing(false)}>
@@ -22,17 +33,24 @@ const Task = ({ task, onChange, onDelete }) => {
     );
   } else {
     taskContent = (
-      <span className="Task">
-        {task.isComplete ? <del>{task.title}</del> : task.title}
+      <>
+        <div className="flow-column display-task">
+          <div className="task-name">
+            {task.isComplete ? <del>{task.title}</del> : task.title}
+          </div>
+          <div className="task-description">
+            {task.isComplete ? <del>{task.description}</del> : task.description}
+          </div>
+        </div>
         <Button variant="link" onClick={() => setIsEditing(true)}>
           Edit
         </Button>
-      </span>
+      </>
     );
   }
 
   return (
-    <div className="">
+    <Card className="card task">
       <input
         type="checkbox"
         checked={task.isComplete}
@@ -49,7 +67,7 @@ const Task = ({ task, onChange, onDelete }) => {
           onDelete(task.id);
         }}
       />
-    </div>
+    </Card>
   );
 };
 

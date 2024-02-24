@@ -1,22 +1,61 @@
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+body{
+  background-color: #68b5d8;
+  font-family: "Montserrat";
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.card{
+  background-color: #fff;
+  margin-bottom: 10px;
+  margin-top: 5px;
+  padding: 15px;
+  flex-direction: row;
 }
 
-.Task{
+.flex-column{
+  flex-direction: column;
+}
+
+.new-task-heading{
+  margin-bottom: 20px;
+}
+
+.title-summary{
+  padding-left: 10px;
+  font-style: italic;
+  font-size: .9em;
+}
+
+.new-task-field{
+  display: grid;
+  grid-template-columns: 150px 300px;
+  margin-bottom: 10px;
+}
+
+.new-task-field-label{
+  padding-right: 15px;
+}
+
+.task{
+  align-items: center;
   padding-right: 10px;
   padding-left: 10px;
   font-size: 1.2em;
 }
 
-.Task-Complete{
-  text-decoration: line-through;
+.display-task{
+  padding-left: 5px;
+  padding-right: 20px;
+}
+
+.task-name{
+  font-size: 1.1em;
+  font-weight:500;
+}
+
+.task-description{
+  font-size: 0.9em;
+  font-style: italic;
 }
 
 .App-header {
@@ -32,17 +71,4 @@
 
 .Task-List{
   margin-top: 2em;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

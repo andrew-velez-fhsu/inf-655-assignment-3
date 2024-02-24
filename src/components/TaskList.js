@@ -1,6 +1,7 @@
 import { Button, Stack } from "react-bootstrap";
-import Task from "./Task.js";
+import Task from "./Task";
 import { useState } from "react";
+import Card from "./shared/card";
 
 const TaskList = ({ tasks, onChange, onDelete }) => {
   let heading = `Tasks: ${tasks ? tasks.length : 0}`;
@@ -17,10 +18,13 @@ const TaskList = ({ tasks, onChange, onDelete }) => {
     case 2: //show complete
       displayTasks = tasks.filter((task) => task.isComplete === true);
       break;
+    default:
+      console.warn("Undefined filter value");
+      break;
   }
 
   return (
-    <div className="Task-List panel">
+    <Card>
       <div className="panel-heading">
         <h3>{heading}</h3>
       </div>
@@ -46,7 +50,7 @@ const TaskList = ({ tasks, onChange, onDelete }) => {
           ))}
         </ul>
       </div>
-    </div>
+    </Card>
   );
 };
 

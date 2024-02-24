@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Container from "react-bootstrap/Container";
 import NewTask from "./NewTask";
 import TaskList from "./TaskList";
 
@@ -9,10 +8,15 @@ const TaskForm = () => {
   const initialTasks = [];
   const [tasks, setTasks] = useState(initialTasks);
 
-  const handleAddTask = (description) => {
+  const handleAddTask = (name, description) => {
     setTasks([
       ...tasks,
-      { title: description, id: nextTaskId, isComplete: false },
+      {
+        title: name,
+        description: description,
+        id: nextTaskId,
+        isComplete: false,
+      },
     ]);
     setNextTaskId((a) => a + 1);
     console.log(`Created task id ${nextTaskId}`);
@@ -35,7 +39,7 @@ const TaskForm = () => {
   };
 
   return (
-    <Container>
+    <>
       <NewTask onAddTask={handleAddTask} />
       <hr />
       <TaskList
@@ -43,7 +47,7 @@ const TaskForm = () => {
         onChange={handleUpdateTask}
         onDelete={handleDeleteTask}
       />
-    </Container>
+    </>
   );
 };
 
