@@ -1,24 +1,25 @@
 import React, { useState } from "react";
 import NewTask from "./NewTask";
 import TaskList from "./TaskList";
+import { ulid } from "ulid";
 
 const TaskForm = () => {
-  let initialTaskId = 1;
-  const [nextTaskId, setNextTaskId] = useState(initialTaskId);
   const initialTasks = [];
   const [tasks, setTasks] = useState(initialTasks);
 
-  const handleAddTask = (name, description) => {
+  const handleAddTask = (title, description, subTasks) => {
+    const nextTaskId = ulid();
     setTasks([
       ...tasks,
       {
-        title: name,
+        title: title,
         description: description,
         id: nextTaskId,
         isComplete: false,
+        subTasks: subTasks,
       },
     ]);
-    setNextTaskId((a) => a + 1);
+
     console.log(`Created task id ${nextTaskId}`);
   };
 
@@ -38,6 +39,25 @@ const TaskForm = () => {
     setTasks(tasks.filter((t) => t.id !== taskId));
   };
 
+  const handleUpdateSubTask = (updatedSubTask) => {
+    const updatedTasks = tasks.map((t) => {
+      if (t.subTasks.filter((st) => st.key === updatedSubTask.key)) {
+        const updatedTask = { ...t };
+        updatedTask.subTasks = t.subTasks.map((st) => {
+          if (st.key === updatedSubTask.key) {
+            return updatedSubTask;
+          } else {
+            return st;
+          }
+        });
+        return updatedTask;
+      } else {
+        return t;
+      }
+    });
+    setTasks(updatedTasks);
+  };
+
   return (
     <>
       <NewTask onAddTask={handleAddTask} />
@@ -46,6 +66,7 @@ const TaskForm = () => {
         tasks={tasks}
         onChange={handleUpdateTask}
         onDelete={handleDeleteTask}
+        onChangeSubTask={handleUpdateSubTask}
       />
     </>
   );

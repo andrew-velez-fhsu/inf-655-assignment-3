@@ -3,7 +3,7 @@ import Task from "./Task";
 import { useState } from "react";
 import Card from "./shared/card";
 
-const TaskList = ({ tasks, onChange, onDelete }) => {
+const TaskList = ({ tasks, onChange, onDelete, onChangeSubTask }) => {
   let heading = `Tasks: ${tasks ? tasks.length : 0}`;
   const [filter, setFilter] = useState(0);
 
@@ -24,11 +24,11 @@ const TaskList = ({ tasks, onChange, onDelete }) => {
   }
 
   return (
-    <Card>
-      <div className="panel-heading">
+    <Card className="flexColumn task-list">
+      <div>
         <h3>{heading}</h3>
       </div>
-      <div className="panel-body">
+      <div>
         <div className="filter">
           <Stack gap={2} direction="horizontal">
             <Button variant="link" onClick={() => setFilter(0)}>
@@ -44,11 +44,17 @@ const TaskList = ({ tasks, onChange, onDelete }) => {
             </Button>
           </Stack>
         </div>
-        <ul>
+        <div className="task-container">
           {displayTasks.map((task) => (
-            <Task task={task} onChange={onChange} onDelete={onDelete} />
+            <Task
+              key={task.id}
+              task={task}
+              onChange={onChange}
+              onDelete={onDelete}
+              onChangeSubTask={onChangeSubTask}
+            />
           ))}
-        </ul>
+        </div>
       </div>
     </Card>
   );

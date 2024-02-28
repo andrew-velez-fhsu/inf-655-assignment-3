@@ -1,6 +1,6 @@
 
 body{
-  background-color: #68b5d8;
+  background-color: #03fce3;
   font-family: "Montserrat";
 }
 
@@ -16,6 +16,17 @@ body{
   flex-direction: column;
 }
 
+.task-list{
+  background-color: #fff;
+  margin-bottom: 10px;
+  margin-top: 5px;
+  padding: 15px;
+  border-color: rgba(0,0,0,0.1);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 6px;
+}
+
 .new-task-heading{
   margin-bottom: 20px;
 }
@@ -26,7 +37,7 @@ body{
   font-size: .9em;
 }
 
-.new-task-field{
+.form-row{
   display: grid;
   grid-template-columns: 150px 300px;
   margin-bottom: 10px;
@@ -36,14 +47,32 @@ body{
   padding-right: 15px;
 }
 
-.task{
+.task{    
+  padding: 20px 10px 10px 10px;
   align-items: center;
-  padding-right: 10px;
-  padding-left: 10px;
   font-size: 1.2em;
+  width: 500px;
+  border-width: 1px;
+  border-radius: 4px;
+  border-color: #999999;
+  border-style: solid;
+  margin-top: 20px;
+  margin-bottom: 20px;  
 }
 
-.display-task{
+.task > * {
+  flex: 1 100%;
+}
+
+.task-content{
+  display:grid;
+  grid-template-columns: 1fr 9fr ;  
+  position: relative;
+}
+
+.task-details{
+  display: grid;
+  grid-template-columns: 4fr 1fr;
   padding-left: 5px;
   padding-right: 20px;
 }
@@ -58,17 +87,46 @@ body{
   font-style: italic;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.error-text{
+  color: red;
+  font-style: italic;
+  font-size: 0.9em;
 }
 
 .Task-List{
   margin-top: 2em;
+}
+
+.task-container{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.close-button{
+  position: absolute;
+  right: 3px;
+  top: 3px;
+}
+
+.task-subtask{
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #888888;  
+  font-size: 1rem;
+}
+
+.task-subtask li{
+  list-style-type: none;
+}
+
+.subTask-checkbox{
+  margin-right: 10px;
+}
+
+.task-edit{
+  margin-bottom: 5px;
 }

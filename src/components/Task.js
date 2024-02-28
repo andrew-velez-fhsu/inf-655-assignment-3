@@ -2,39 +2,46 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import CloseButton from "react-bootstrap/CloseButton";
 import Card from "./shared/card";
+import SubTasks from "./SubTasks";
+import FormRow from "./shared/formRow";
 
-const Task = ({ task, onChange, onDelete }) => {
+const Task = ({ task, onChange, onDelete, onChangeSubTask }) => {
   const [isEditing, setIsEditing] = useState(false);
 
   let taskContent;
   if (isEditing) {
     taskContent = (
-      <>
-        <label htmlFor="name">Name:</label>
-        <input
+      <div className="task-edit">
+        <FormRow
+          name="title"
+          label="Title:"
           value={task.title}
-          name="name"
           onChange={(e) => {
             onChange({ ...task, title: e.target.value });
           }}
         />
-        <label htmlFor="description">Description:</label>
-        <input
+        <FormRow
           name="description"
+          label="Description:"
           value={task.description}
           onChange={(e) => {
             onChange({ ...task, description: e.target.value });
           }}
         />
-        <Button variant="link" onClick={() => setIsEditing(false)}>
+        <Button
+          variant="primary"
+          onClick={() => {
+            setIsEditing(false);
+          }}
+        >
           Save
         </Button>
-      </>
+      </div>
     );
   } else {
     taskContent = (
-      <>
-        <div className="flow-column display-task">
+      <div className="task-details">
+        <div className="">
           <div className="task-name">
             {task.isComplete ? <del>{task.title}</del> : task.title}
           </div>
@@ -42,30 +49,43 @@ const Task = ({ task, onChange, onDelete }) => {
             {task.isComplete ? <del>{task.description}</del> : task.description}
           </div>
         </div>
-        <Button variant="link" onClick={() => setIsEditing(true)}>
-          Edit
-        </Button>
-      </>
+        <div>
+          <Button variant="secondary" onClick={() => setIsEditing(true)}>
+            Edit
+          </Button>
+        </div>
+      </div>
     );
   }
 
   return (
-    <Card className="card task">
-      <input
-        type="checkbox"
-        checked={task.isComplete}
-        onChange={(e) => {
-          onChange({
-            ...task,
-            isComplete: e.target.checked,
-          });
-        }}
-      />
-      {taskContent}
-      <CloseButton
-        onClick={() => {
-          onDelete(task.id);
-        }}
+    <Card className="task">
+      <div className="task-content">
+        <div>
+          <input
+            type="checkbox"
+            checked={task.isComplete}
+            onChange={(e) => {
+              onChange({
+                ...task,
+                isComplete: e.target.checked,
+              });
+            }}
+          />
+        </div>
+        {taskContent}
+        <CloseButton
+          className="close-button"
+          onClick={() => {
+            onDelete(task.id);
+          }}
+        />
+      </div>
+      <SubTasks
+        className="task-subtask"
+        subTasks={task.subTasks}
+        enableCompletion={true}
+        onChangeSubTask={onChangeSubTask}
       />
     </Card>
   );
