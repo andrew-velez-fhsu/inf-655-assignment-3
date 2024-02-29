@@ -61,7 +61,6 @@ const TaskForm = () => {
   return (
     <>
       <NewTask onAddTask={handleAddTask} />
-      <hr />
       <TaskList
         tasks={tasks}
         onChange={handleUpdateTask}

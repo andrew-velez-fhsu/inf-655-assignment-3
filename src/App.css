@@ -1,9 +1,11 @@
 
 body{
-  background-color: #03fce3;
+  background-color: #362523;
   font-family: "Montserrat";
 }
-
+.title{
+  margin-top: 30px !important;
+}
 .card{
   background-color: #fff;
   margin-bottom: 10px;
@@ -68,6 +70,7 @@ body{
   display:grid;
   grid-template-columns: 1fr 9fr ;  
   position: relative;
+  margin-bottom: 10px;
 }
 
 .task-details{
